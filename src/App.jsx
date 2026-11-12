@@ -76,7 +76,7 @@ function SectionTitle({kicker,title,copy}){return <div className="section-title"
 function ServiceCard({item}){let Icon=item.icon;return <Link to={item.path} className="service-card"><div className="service-image" style={{backgroundImage:`linear-gradient(0deg,#111518c9,transparent 65%),url(${item.img})`}}><span>{item.id}</span><div className="service-symbol"><Icon/></div></div><div className="service-card-body"><Eyebrow>{item.tag}</Eyebrow><h3>{item.title}</h3><p>{item.desc}</p><b>Explore sector <ArrowUpRight size={16}/></b></div></Link>}
 function SectorGallery(){return <section className="sector-gallery" aria-label="Lifts, electrical work, and aggregates"><div className="sector-gallery-track" aria-hidden="true">{[0,1].map(copy=><div className="sector-gallery-group" key={copy}>{galleryImages.map(image=><div className="sector-gallery-item" key={image}><img src={image} alt=""/></div>)}</div>)}</div></section>}
 function EnquiryForm({selected='General enquiry'}){
- const [data,setData]=useState({name:'',phone:'',email:'',sector:selected,message:''});
+ const [data,setData]=useState({name:'',phone:'',location:'',email:'',sector:selected,message:''});
  const change=e=>setData({...data,[e.target.name]:e.target.value});
  const submit=e=>{
   e.preventDefault();
@@ -88,6 +88,7 @@ function EnquiryForm({selected='General enquiry'}){
    'CONTACT DETAILS',
    `Name:    ${data.name}`,
    `Phone:   ${data.phone}`,
+   `Location: ${data.location}`,
    `Email:   ${data.email}`,
    '',
    'SERVICE',
@@ -102,9 +103,10 @@ function EnquiryForm({selected='General enquiry'}){
   window.location.href=`mailto:${company.enquiryEmail}?subject=${encodeURIComponent('BHLISS Enterprises website enquiry')}&body=${encodeURIComponent(body)}`;
  };
  return <form className="enquiry-form" onSubmit={submit}>
-  <div className="form-grid"><label>Full name<input name="name" value={data.name} onChange={change} required placeholder="Your name"/></label><label>Mobile number<input name="phone" value={data.phone} onChange={change} required type="tel" placeholder="+91"/></label></div>
-  <div className="form-grid"><label>Email address<input name="email" value={data.email} onChange={change} type="email" placeholder="name@example.com"/></label><label>Service required<select name="sector" value={data.sector} onChange={change}><option>General enquiry</option><option>Anchor 3G Lifts</option><option>Electrical solutions</option><option>Construction aggregates</option></select></label></div>
-  <label>Project details<textarea name="message" rows="4" value={data.message} onChange={change} placeholder="Tell us about your requirement..."/></label>
+  <div className="form-grid"><label>Full name<input name="name" value={data.name} onChange={change} required pattern=".*\S.*" title="Please enter your full name." autoComplete="name" placeholder="Your name"/></label><label>Mobile number<input name="phone" value={data.phone} onChange={change} required type="tel" inputMode="tel" pattern="(?:\+?91[\s-]?)?[6-9][0-9]{9}" title="Enter a valid 10-digit Indian mobile number, optionally with +91." autoComplete="tel" placeholder="+91 9876543210"/></label></div>
+  <div className="form-grid"><label>Location<input name="location" value={data.location} onChange={change} required pattern=".*\S.*" title="Please enter your location." autoComplete="address-level2" placeholder="City or area"/></label><label>Email address<input name="email" value={data.email} onChange={change} required type="email" autoComplete="email" placeholder="name@example.com"/></label></div>
+  <label>Service required<select name="sector" value={data.sector} onChange={change}><option>General enquiry</option><option>Anchor 3G Lifts</option><option>Electrical solutions</option><option>Construction aggregates</option></select></label>
+  <label>Project details<textarea name="message" rows="4" value={data.message} onChange={change} required placeholder="Tell us about your requirement..."/></label>
   <button className="button" type="submit">Send enquiry <Send size={16}/></button><small>Submitting opens your email application with the enquiry details.</small>
  </form>
 }
