@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Routes, Route, Link, NavLink, useLocation} from 'react-router-dom';
 import {motion, useScroll, useTransform} from 'framer-motion';
 import {ArrowRight, ArrowUpRight, Menu, X, Phone, Mail, MapPin, Building2, Zap, Mountain, ShieldCheck, CheckCircle2, Clock3, Layers3, Send, ChevronRight, MoveUp, Cable, Camera, HardHat, Home as HomeIcon, Factory, HeartPulse, Landmark, Wrench, Sparkles} from 'lucide-react';
-import brandLogo from './assets/BHLISS-logo.png';
+import brandLogo from './assets/bhliss-logo.png';
 import anchorLogo from './assets/anchor-3g-logo-enhanced.png';
 import liftsImage from './assets/lifts-category.jpg';
 import liftDetailImage from './assets/lifts-detail.jpg';
