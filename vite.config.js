@@ -7,5 +7,6 @@ const base = repositoryName && !isUserOrOrganizationSite ? `/${repositoryName}/`
 
 export default defineConfig({
   plugins: [react()],
-  base,
+  base: '/'
 });
+
