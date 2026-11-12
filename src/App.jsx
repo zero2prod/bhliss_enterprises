@@ -78,7 +78,29 @@ function SectorGallery(){return <section className="sector-gallery" aria-label="
 function EnquiryForm({selected='General enquiry'}){
  const [data,setData]=useState({name:'',phone:'',email:'',sector:selected,message:''});
  const change=e=>setData({...data,[e.target.name]:e.target.value});
- const submit=e=>{e.preventDefault();const body=`Name: ${data.name}%0APhone: ${data.phone}%0AEmail: ${data.email}%0ASector: ${data.sector}%0AMessage: ${data.message}`;window.location.href=`mailto:${company.enquiryEmail}?subject=${encodeURIComponent('BHLISS Enterprises website enquiry')}&body=${body}`;};
+ const submit=e=>{
+  e.preventDefault();
+  const body=[
+   'BHLISS ENTERPRISES',
+   'Website Enquiry',
+   '────────────────────────',
+   '',
+   'CONTACT DETAILS',
+   `Name:    ${data.name}`,
+   `Phone:   ${data.phone}`,
+   `Email:   ${data.email}`,
+   '',
+   'SERVICE',
+   data.sector,
+   '',
+   'PROJECT DETAILS',
+   data.message,
+   '',
+   '────────────────────────',
+   'Sent from the BHLISS Enterprises website'
+  ].join('\n');
+  window.location.href=`mailto:${company.enquiryEmail}?subject=${encodeURIComponent('BHLISS Enterprises website enquiry')}&body=${encodeURIComponent(body)}`;
+ };
  return <form className="enquiry-form" onSubmit={submit}>
   <div className="form-grid"><label>Full name<input name="name" value={data.name} onChange={change} required placeholder="Your name"/></label><label>Mobile number<input name="phone" value={data.phone} onChange={change} required type="tel" placeholder="+91"/></label></div>
   <div className="form-grid"><label>Email address<input name="email" value={data.email} onChange={change} type="email" placeholder="name@example.com"/></label><label>Service required<select name="sector" value={data.sector} onChange={change}><option>General enquiry</option><option>Anchor 3G Lifts</option><option>Electrical solutions</option><option>Construction aggregates</option></select></label></div>
