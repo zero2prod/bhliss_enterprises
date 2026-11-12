@@ -77,9 +77,15 @@ function ServiceCard({item}){let Icon=item.icon;return <Link to={item.path} clas
 function SectorGallery(){return <section className="sector-gallery" aria-label="Lifts, electrical work, and aggregates"><div className="sector-gallery-track" aria-hidden="true">{[0,1].map(copy=><div className="sector-gallery-group" key={copy}>{galleryImages.map(image=><div className="sector-gallery-item" key={image}><img src={image} alt=""/></div>)}</div>)}</div></section>}
 function EnquiryForm({selected='General enquiry'}){
  const [data,setData]=useState({name:'',phone:'',location:'',email:'',sector:selected,message:''});
- const change=e=>setData({...data,[e.target.name]:e.target.value});
+ const [validationError,setValidationError]=useState('');
+ const change=e=>{setData({...data,[e.target.name]:e.target.value});setValidationError('')};
  const submit=e=>{
   e.preventDefault();
+  const requiredFields=[['name','Full name'],['phone','Mobile number'],['location','Location'],['email','Email address'],['message','Project details']];
+  const missingField=requiredFields.find(([field])=>!data[field].trim());
+  if(missingField){setValidationError(`${missingField[1]} is required.`);e.currentTarget.elements.namedItem(missingField[0]).focus();return;}
+  if(!/^(?:\+?91[\s-]?)?[6-9][0-9]{9}$/.test(data.phone.trim())){setValidationError('Enter a valid 10-digit mobile number, optionally with +91.');e.currentTarget.elements.namedItem('phone').focus();return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())){setValidationError('Enter a valid email address.');e.currentTarget.elements.namedItem('email').focus();return;}
   const body=[
    'BHLISS ENTERPRISES',
    'Website Enquiry',
@@ -102,11 +108,12 @@ function EnquiryForm({selected='General enquiry'}){
   ].join('\n');
   window.location.href=`mailto:${company.enquiryEmail}?subject=${encodeURIComponent('BHLISS Enterprises website enquiry')}&body=${encodeURIComponent(body)}`;
  };
- return <form className="enquiry-form" onSubmit={submit}>
-  <div className="form-grid"><label>Full name<input name="name" value={data.name} onChange={change} required pattern=".*\S.*" title="Please enter your full name." autoComplete="name" placeholder="Your name"/></label><label>Mobile number<input name="phone" value={data.phone} onChange={change} required type="tel" inputMode="tel" pattern="(?:\+?91[\s-]?)?[6-9][0-9]{9}" title="Enter a valid 10-digit Indian mobile number, optionally with +91." autoComplete="tel" placeholder="+91 9876543210"/></label></div>
-  <div className="form-grid"><label>Location<input name="location" value={data.location} onChange={change} required pattern=".*\S.*" title="Please enter your location." autoComplete="address-level2" placeholder="City or area"/></label><label>Email address<input name="email" value={data.email} onChange={change} required type="email" autoComplete="email" placeholder="name@example.com"/></label></div>
+ return <form className="enquiry-form" onSubmit={submit} noValidate>
+  <div className="form-grid"><label><span>Full name <span className="required-mark" aria-hidden="true">*</span></span><input name="name" value={data.name} onChange={change} required pattern=".*\S.*" title="Please enter your full name." autoComplete="name" placeholder="Your name"/></label><label><span>Mobile number <span className="required-mark" aria-hidden="true">*</span></span><input name="phone" value={data.phone} onChange={change} required type="tel" inputMode="tel" pattern="(?:\+?91[\s-]?)?[6-9][0-9]{9}" title="Enter a valid 10-digit Indian mobile number, optionally with +91." autoComplete="tel" placeholder="xxxxxxxxxx"/></label></div>
+  <div className="form-grid"><label><span>Location <span className="required-mark" aria-hidden="true">*</span></span><input name="location" value={data.location} onChange={change} required pattern=".*\S.*" title="Please enter your location." autoComplete="address-level2" placeholder="Area"/></label><label><span>Email address <span className="required-mark" aria-hidden="true">*</span></span><input name="email" value={data.email} onChange={change} required type="email" autoComplete="email" placeholder="name@example.com"/></label></div>
   <label>Service required<select name="sector" value={data.sector} onChange={change}><option>General enquiry</option><option>Anchor 3G Lifts</option><option>Electrical solutions</option><option>Construction aggregates</option></select></label>
-  <label>Project details<textarea name="message" rows="4" value={data.message} onChange={change} required placeholder="Tell us about your requirement..."/></label>
+  <label><span>Project details <span className="required-mark" aria-hidden="true">*</span></span><textarea name="message" rows="4" value={data.message} onChange={change} required placeholder="Tell us about your requirement..."/></label>
+  {validationError&&<p className="form-error" role="alert">{validationError}</p>}
   <button className="button" type="submit">Send enquiry <Send size={16}/></button><small>Submitting opens your email application with the enquiry details.</small>
  </form>
 }
