@@ -83,16 +83,16 @@
 .detail-overview-copy.has-brand .brand-lockup{margin-top:auto;margin-bottom:34px}
 .category-switcher{background:#eceeeb;padding:25px 0 28px}
 .category-switcher nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px;margin-top:15px}
-.category-switcher nav a{display:flex;align-items:center;gap:10px;min-height:45px;padding:10px 13px;background:#fff;border:1px solid #dfe3df;color:var(--ink);font:700 11px Manrope;transition:background .2s,border-color .2s,color .2s}
-.category-switcher nav a:hover,.category-switcher nav a.active{background:var(--orange);border-color:var(--orange);color:var(--ink)}
-.category-switcher nav a span{font-size:9px;font-weight:800;opacity:.7}
+.category-switcher nav a,.category-switcher nav button{display:flex;align-items:center;gap:10px;min-height:45px;padding:10px 13px;background:#fff;border:1px solid #dfe3df;color:var(--ink);font:700 11px Manrope;text-align:left;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.category-switcher nav a:hover,.category-switcher nav a.active,.category-switcher nav button:hover,.category-switcher nav button.active{background:var(--orange);border-color:var(--orange);color:var(--ink)}
+.category-switcher nav a span,.category-switcher nav button span{font-size:9px;font-weight:800;opacity:.7}
 .category-images{background:var(--paper)}
 .category-image-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .category-image-grid figure{height:280px;margin:0;overflow:hidden;background:#e4e7e4}
 .category-image-grid img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .category-image-grid figure:hover img{transform:scale(1.04)}
 @media(max-width:700px){.category-image-grid{grid-template-columns:1fr 1fr;gap:10px}.category-image-grid figure{height:45vw;max-height:240px}}
-@media(max-width:700px){.detail-category-card{grid-template-columns:23px 32px minmax(0,1fr);grid-template-areas:"number icon title" ". . description" ". . action";column-gap:9px;row-gap:5px;padding:12px}.detail-category-card>svg{width:19px;height:19px}.detail-category-card p{font-size:10px}.detail-overview-copy.has-brand .brand-lockup{margin-top:30px;margin-bottom:0}.category-switcher{padding:20px 0}.category-switcher nav{grid-template-columns:1fr 1fr;gap:7px}.category-switcher nav a{min-height:42px;padding:9px;font-size:10px}}
+@media(max-width:700px){.detail-category-card{grid-template-columns:23px 32px minmax(0,1fr);grid-template-areas:"number icon title" ". . description" ". . action";column-gap:9px;row-gap:5px;padding:12px}.detail-category-card>svg{width:19px;height:19px}.detail-category-card p{font-size:10px}.detail-overview-copy.has-brand .brand-lockup{margin-top:30px;margin-bottom:0}.category-switcher{padding:20px 0}.category-switcher nav{grid-template-columns:1fr 1fr;gap:7px}.category-switcher nav a,.category-switcher nav button{min-height:42px;padding:9px;font-size:10px}}
 .aggregate-content{background:var(--paper);padding:48px 0}
 .aggregate-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .aggregate-photo-grid figure{height:280px;margin:0;overflow:hidden;background:#e4e7e4}
@@ -108,6 +108,9 @@
 @media(max-width:700px){.aggregate-photo-grid{grid-template-columns:1fr 1fr;gap:10px}.aggregate-photo-grid figure{height:45vw;max-height:240px}.aggregate-categories{margin-bottom:34px}.aggregate-categories ol{grid-template-columns:1fr 1fr;gap:10px}.aggregate-categories li{gap:9px;min-height:68px;padding:11px 10px}.aggregate-categories li>b{font-size:12px}}
 .back-link{display:flex;width:max-content;align-items:center;background:var(--orange);color:var(--ink);padding:9px 13px;border-radius:6px;font:700 14px Manrope,sans-serif;margin:0 0 14px;transition:background .2s,transform .2s}
 .back-link:hover{background:#ff8b35;transform:translateY(-2px)}
+.contact-info>a>.map-pin-icon{width:26px;height:26px;flex:0 0 26px}
+.map-card .map-pin-icon{width:29px;height:29px}
+.footer-grid .map-pin-icon{width:19px;height:19px;flex:0 0 19px}
 .header,.footer{background:#eceeeb}
 .brand{flex:0 0 auto}
 .header-clock{display:block;flex:0 0 auto;margin:0 auto 0 24px;padding-left:16px;border-left:2px solid var(--orange);color:#363d42;font-size:11px;line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap}
