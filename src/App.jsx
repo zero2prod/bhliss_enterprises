@@ -21,6 +21,11 @@ const sectors = [
  {path:'/aggregates',id:'03',title:'Construction Aggregates',tag:'MATERIAL SUPPLY',desc:'Essential construction materials for concrete, infrastructure and building projects, supplied to match project requirements.',img:aggregatesImage,icon:Mountain}
 ];
 const galleryImages=[liftsImage,electricalPanelImage,aggregateShovelImage,liftInteriorImage,aggregatesImage,electricalMetersImage,liftDetailImage,electricalImage,aggregateStonesImage];
+const detailGalleryImages={
+ lifts: import.meta.glob('../images/lifts/*.{jpg,jpeg,png,webp}',{eager:true,query:'?url',import:'default'}),
+ electrical: import.meta.glob('../images/electrical/*.{jpg,jpeg,png,webp}',{eager:true,query:'?url',import:'default'}),
+ aggregates: import.meta.glob('../images/aggregates/*.{jpg,jpeg,png,webp}',{eager:true,query:'?url',import:'default'})
+};
 const liftItems=[
  ['Commercial Lifts','Efficient passenger movement for offices, retail, hotels and mixed-use developments.',Building2],
  ['Residential Lifts','Convenient home lift options for villas, apartments and private residences.',HomeIcon],
@@ -75,6 +80,11 @@ function Button({to='#contact',children,light=false}){return <Link className={'b
 function SectionTitle({kicker,title,copy}){return <div className="section-title"><Eyebrow>{kicker}</Eyebrow><h2>{title}</h2>{copy&&<p>{copy}</p>}</div>}
 function ServiceCard({item}){let Icon=item.icon;return <Link to={item.path} className="service-card"><div className="service-image" style={{backgroundImage:`linear-gradient(0deg,#111518c9,transparent 65%),url(${item.img})`}}><span>{item.id}</span><div className="service-symbol"><Icon/></div></div><div className="service-card-body"><Eyebrow>{item.tag}</Eyebrow><h3>{item.title}</h3><p>{item.desc}</p><b>Explore sector <ArrowUpRight size={16}/></b></div></Link>}
 function SectorGallery(){return <section className="sector-gallery" aria-label="Lifts, electrical work, and aggregates"><div className="sector-gallery-track" aria-hidden="true">{[0,1].map(copy=><div className="sector-gallery-group" key={copy}>{galleryImages.map(image=><div className="sector-gallery-item" key={image}><img src={image} alt=""/></div>)}</div>)}</div></section>}
+function DetailGallery({type,title}){
+ const images=Object.entries(detailGalleryImages[type]||{}).sort(([a],[b])=>a.localeCompare(b,undefined,{numeric:true})).map(([,src])=>src);
+ if(!images.length)return null;
+ return <section className="detail-gallery" aria-label={`${title} image gallery`}><div className="detail-gallery-track" aria-hidden="true">{[0,1].map(copy=><div className="detail-gallery-group" key={copy}>{images.map((src,i)=><div className="detail-gallery-item" key={`${src}-${i}`}><img src={src} alt="" loading={copy===0&&i<3?'eager':'lazy'}/></div>)}</div>)}</div></section>
+}
 function EnquiryForm({selected='General enquiry'}){
  const [data,setData]=useState({name:'',phone:'',location:'',email:'',sector:selected,message:''});
  const [validationError,setValidationError]=useState('');
@@ -139,6 +149,7 @@ function Detail({type}){
  const Icon=item.icon;
  const description=isLift?'Lift options for different building types and movement needs, with Anchor 3G as our dedicated lift brand.':isElec?'Electrical service categories for homes, businesses and industrial facilities, shaped around practical project requirements.':'Construction materials to support concrete, building and infrastructure works, with key aggregate sizes and manufactured sand.';
  return <main className="detail-page"><section className="detail-hero" style={{backgroundImage:`linear-gradient(90deg,#171a1df0 0%,#171a1ddc 55%,#171a1d50 100%),url(${banner})`}}><div className="container detail-hero-content"><Link to="/" className="back-link">← Back to home</Link><Eyebrow light>{item.tag}</Eyebrow><h1>{item.title}<br/><span>by BHLISS.</span></h1><p>{description}</p><Button to="/contact">Enquire about this sector</Button></div></section>
+ <DetailGallery type={type} title={item.title}/>
  <section className="detail-overview section-pad"><div className="container detail-overview-grid"><div><Eyebrow>WHAT WE OFFER</Eyebrow><h2>{isLift?'Solutions for every vertical journey.':isElec?'Powering spaces with purpose.':'The materials behind stronger builds.'}</h2><p>{item.desc}</p>{isLift&&<div className="brand-lockup"><img src={anchorLogo} alt="Anchor 3G lift logo"/></div>}</div><div className="detail-list"><div className="list-head"><span>OUR RANGE</span><span>{String(list.length).padStart(2,'0')} CATEGORIES</span></div>{list.map(([name,desc,Icon],i)=><article className="range-row" key={name}><span className="range-num">0{i+1}</span><div className="range-icon"><Icon/></div><div className="range-copy"><h3>{name}</h3><p>{desc}</p></div><ChevronRight/></article>)}</div></div></section>
  <section className="detail-image-section"><div className="container image-feature"><img src={banner} alt={`${item.title} project visual`}/><div><Eyebrow>BUILT AROUND YOUR REQUIREMENT</Eyebrow><h2>Let's find the right fit for your project.</h2><p>Tell us about the site, building type, quantity or service scope. Our team can help direct your enquiry to the right business vertical.</p><Button to="/contact">Talk to our team</Button></div></div></section><ContactStrip/></main>
 }
