@@ -1,40 +1,33 @@
-# BHLISS Enterprises — React website
+# BHLISS Enterprises — Immersive React website
 
-Responsive React + Vite website with a white header, charcoal/orange theme, separate business pages and transparent logo assets.
+Responsive React + Vite website for BHLISS Enterprises. Existing routes, business content, brand assets, enquiry flow and GitHub Pages deployment have been retained.
 
 ## Run locally
-- Install Node.js 18+
+- Node.js 20+
 - `npm install`
 - `npm run dev`
-- Production build: `npm run build` (output in `dist/`)
-- Preview the production build locally: `npm run preview`
+- Production build: `npm run build`
+- Preview: `npm run preview`
 
-## GitHub Pages deployment
-- Push this project to a GitHub repository on the `main` branch.
-- In the repository, open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**.
-- The workflow in `.github/workflows/deploy-pages.yml` builds the site and deploys `dist/` after each push to `main`. It can also be started from the repository's **Actions** tab with **Run workflow**.
-- For a project site, the Vite base path and React Router basename are derived from the repository name. A `404.html` fallback supports direct visits and refreshes on routes such as `/lifts` and `/contact`.
-- The site URL will be `https://<owner>.github.io/<repository>/`. For a user or organization repository named `<owner>.github.io`, it will be `https://<owner>.github.io/`.
-- Local production build and preview: `npm ci`, `npm run build`, then `npm run preview`.
+## Interactive motion stack
+- **GSAP + ScrollTrigger** — scroll reveal choreography and section entrances.
+- **Lenis** — smooth desktop wheel scrolling, with reduced-motion support.
+- **Three.js + React Three Fiber + Drei** — cursor-responsive 3D hero sculpture.
+- **Framer Motion** — existing lightweight React UI transitions.
+- **CSS** — responsive depth layers, hover light sweep and reduced-motion fallbacks.
+
+The 3D hero is decorative and does not contain essential information. It is designed to degrade gracefully on small screens. Avoid enabling several animation libraries on the same element.
 
 ## Routes
 - `/` Home
 - `/lifts` Anchor 3G lift categories
 - `/electrical` Commercial, residential and industrial electrical
-- `/aggregates` M-Sand, 10 mm, 20 mm, 40 mm, crushed stone/chippings
+- `/aggregates` M-Sand, graded aggregates and crushed stone
 - `/about` Company overview and values
-- `/contact` Contact details, location link and enquiry form
+- `/contact` Contact details and enquiry form
 
-## Configured contact details
-- Mobile: 8838385160 / 9566882982
-- Email / enquiries: BHLISSenterprises@gmail.com
-- Address: BHLISS Enterprises, 1st Floor, Dwaraka Complex, Shanthi Nagar West, Inner Ring Road, Hosur, Krishnagiri District, Tamil Nadu - 635109
+## GitHub Pages
+The included GitHub Actions workflow builds `dist/` and deploys it to GitHub Pages. Keep the repository Pages source set to **GitHub Actions**.
 
-The supplied BHLISS logo and enhanced transparent Anchor 3G logo artwork are used from `src/assets`; the Anchor 3G branding is displayed on light backgrounds for contrast. Local category photos from Pexels are stored in `src/assets`; other website photography is loaded from Unsplash URLs. Use owned or licensed project photos for final commercial deployment.
-
-
-## Latest UI refinements
-- Contact route now displays one enquiry form only; the shared second enquiry panel is not rendered on the Contact page.
-- Footer is white with the original transparent BHLISS logo artwork (no colour-inverting filter).
-- Contact navigation CTA has a visible label and high-contrast styling.
-- Contact details and map card have refined hover/focus styling.
+## Contact and enquiry form
+Contact information is maintained in `src/config.js`. The enquiry form opens the visitor's configured email application; it does not submit data to a server or database.
