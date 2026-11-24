@@ -1,23 +1,23 @@
-# BHLISS Enterprises — Immersive React website
+# BHLISS Enterprises — Cartoon-themed interactive website
 
-Responsive React + Vite website for BHLISS Enterprises. Existing routes, business content, brand assets, enquiry flow and GitHub Pages deployment have been retained.
+Responsive React + Vite website for BHLISS Enterprises. The full visual system uses custom vector cartoon illustrations to explain the company's three service verticals.
 
 ## Run locally
-- Node.js 20+
+- Node.js 22+
 - `npm install`
 - `npm run dev`
 - Production build: `npm run build`
 - Preview: `npm run preview`
 
-## Interactive motion stack
-- **GSAP + ScrollTrigger** — scroll reveal choreography, pinned three-chapter scrollytelling and image depth transitions.
-- **Lenis** — smooth desktop wheel scrolling, with reduced-motion support.
-- **Three.js + React Three Fiber + Drei** — cursor-responsive 3D hero sculpture.
+## Visual and motion system
+- **Custom SVG cartoon scenes** — lift shaft and passenger lift, electrician and distribution panel, aggregate delivery truck and stone materials.
+- **GSAP + ScrollTrigger** — scroll reveal choreography and pinned three-chapter service storytelling.
+- **Lenis** — smooth desktop wheel scrolling with reduced-motion support.
 - **Framer Motion** — existing lightweight React UI transitions.
-- **CSS Scroll-driven Animations** — progressive image reveals on browsers that support view timelines.
-- **CSS** — responsive depth layers, hover light sweep and reduced-motion fallbacks.
+- **CSS Scroll-driven Animations** — progressive reveals where supported.
+- **Responsive CSS** — warm paper backgrounds, pastel service palettes, ink outlines, sticker details and hand-drawn-inspired cards.
 
-The 3D hero is decorative and does not contain essential information. It is designed to degrade gracefully on small screens. Avoid enabling several animation libraries on the same element.
+The artwork is original vector illustration code rather than stock photos. Existing business copy, service categories, Anchor 3G brand, navigation, contact information, enquiry form and GitHub Pages deployment are retained.
 
 ## Routes
 - `/` Home
@@ -30,5 +30,5 @@ The 3D hero is decorative and does not contain essential information. It is desi
 ## GitHub Pages
 The included GitHub Actions workflow builds `dist/` and deploys it to GitHub Pages. Keep the repository Pages source set to **GitHub Actions**.
 
-## Contact and enquiry form
-Contact information is maintained in `src/config.js`. The enquiry form opens the visitor's configured email application; it does not submit data to a server or database.
+## Contact
+Contact information is maintained in `src/config.js`. The enquiry form opens the visitor's email application; it does not send data to a backend.
