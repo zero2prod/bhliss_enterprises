@@ -151,13 +151,37 @@ function HeroScene(){
   </Float>
  </group>
 }
-function HeroVisual(){return <div className="hero-visual" aria-label="Interactive 3D BHLISS brand sculpture"><Canvas camera={{position:[0,0,4.7],fov:42}} dpr={[1,1.5]} gl={{alpha:true,antialias:true}}><ambientLight intensity={1.2}/><directionalLight position={[4,5,5]} intensity={2.2}/><pointLight position={[-3,-2,2]} color="#f97316" intensity={3}/><HeroScene/><ContactShadows position={[0,-1.8,0]} opacity={.28} scale={5} blur={2.6}/></Canvas><span className="visual-orbit orbit-one"/><span className="visual-orbit orbit-two"/><div className="visual-caption"><i/> ENGINEERED TO MOVE</div></div>}
+function HeroVisual(){return <div className="hero-visual" aria-label="Interactive 3D BHLISS brand sculpture"><Canvas camera={{position:[0,0,4.7],fov:42}} dpr={[1,1.5]} gl={{alpha:true,antialias:true}} fallback={<div className="hero-3d-fallback" aria-hidden="true"/>}><ambientLight intensity={1.2}/><directionalLight position={[4,5,5]} intensity={2.2}/><pointLight position={[-3,-2,2]} color="#f97316" intensity={3}/><HeroScene/><ContactShadows position={[0,-1.8,0]} opacity={.28} scale={5} blur={2.6}/></Canvas><span className="visual-orbit orbit-one"/><span className="visual-orbit orbit-two"/><div className="visual-caption"><i/> ENGINEERED TO MOVE</div></div>}
+function ScrollStory(){
+ const stories=[
+  {number:'01',kicker:'ANCHOR 3G LIFT SOLUTIONS',title:'Move people and possibilities.',copy:'Lift solutions for residential, commercial, healthcare, institutional and industrial environments.',image:liftsImage,tag:'VERTICAL MOVEMENT'},
+  {number:'02',kicker:'ELECTRICAL SYSTEMS',title:'Power the places we live and work.',copy:'Electrical installation and infrastructure for homes, commercial spaces and industrial operations.',image:electricalImage,tag:'CONNECTED SYSTEMS'},
+  {number:'03',kicker:'CONSTRUCTION AGGREGATES',title:'Build from a stronger foundation.',copy:'M-Sand and graded aggregate materials for construction, concrete and infrastructure requirements.',image:aggregatesImage,tag:'MATERIAL FOUNDATIONS'}
+ ];
+ return <section className="story-section" aria-label="BHLISS capabilities story">
+  <div className="story-stage">
+   <div className="story-topline"><Eyebrow light>THREE CAPABILITIES. ONE COMMITTED PARTNER.</Eyebrow><span>SCROLL TO EXPLORE <i/></span></div>
+   {stories.map((story,index)=><article className={`story-panel story-panel-${index+1}`} key={story.number}>
+    <div className="story-panel-image" style={{backgroundImage:`linear-gradient(90deg,#171a1df2 0%,#171a1dd9 47%,#171a1d66 100%),url(${story.image})`}}/>
+    <div className="story-panel-copy">
+     <span className="story-number">{story.number} / 03</span>
+     <Eyebrow light>{story.kicker}</Eyebrow>
+     <h2>{story.title}</h2>
+     <p>{story.copy}</p>
+     <span className="story-tag">{story.tag}</span>
+    </div>
+    <div className="story-side-mark" aria-hidden="true"><span>{story.number}</span><i/></div>
+   </article>)}
+   <div className="story-scroll-note">BHLISS ENTERPRISES <span>HOSUR · TAMIL NADU</span></div>
+  </div>
+ </section>
+}
 function Home(){
  return <main>
   <section className="hero"><div className="hero-photo" style={{backgroundImage:`linear-gradient(90deg,#171a1df2 0%,#171a1ddc 48%,#171a1d55 100%),url(${photo('photo-1486406146926-c627a92ad1ab',2200)})`}}/><div className="container hero-content"><motion.div initial="hidden" animate="show" variants={fadeUp} className="hero-copy"><Eyebrow light>ENGINEERING • INFRASTRUCTURE • MATERIALS</Eyebrow><h1>Building what<br/>moves us <em>forward.</em></h1><p>From smart Anchor 3G lifts to electrical solutions and construction aggregates, BHLISS Enterprises supports the essential elements of modern projects.</p><div className="hero-actions"><Button to="/contact">Discuss your project</Button><Link className="hero-text-link" to="/about">Get to know us <ArrowRight/></Link></div><div className="hero-stats"><div><b>03</b><span>Business sectors</span></div><div><b>360°</b><span>Project perspective</span></div><div><b>01</b><span>Committed partner</span></div></div></motion.div><div className="hero-side"><HeroVisual/><div className="hero-badge"><span>BE</span><small>BUILT FOR<br/>WHAT'S NEXT</small></div></div></div><div className="hero-scroll">SCROLL TO DISCOVER <i/></div></section>
   <section className="intro-section section-pad gsap-reveal"><div className="container intro-grid"><div><Eyebrow>WHO WE ARE</Eyebrow><h2>One trusted name.<br/><span>Three essential</span><br/>sectors.</h2></div><div className="intro-text"><p className="large">BHLISS Enterprises brings together specialist lift solutions, electrical works and construction materials under one dependable name.</p><p>We believe good projects begin with clear communication, practical solutions and a partner who understands what matters. Our focus is to make sourcing and service coordination more straightforward for our customers.</p><Button to="/about">Discover BHLISS</Button></div></div></section>
   <section className="sectors-section section-pad gsap-reveal" id="sectors"><div className="container"><SectionTitle kicker="OUR BUSINESS VERTICALS" title="Essential services. Thoughtfully connected." copy="Choose a sector to explore our capabilities, service categories and product range."/><div className="service-grid">{sectors.map(s=><ServiceCard item={s} key={s.path}/>)}</div></div></section>
-  <section className="partner-section gsap-reveal"><div className="container partner-grid"><div className="partner-image"><img src={anchorLogo} alt="Anchor 3G lift logo"/></div><div><Eyebrow>OUR LIFT BRAND</Eyebrow><h2>A better way to move<br/><span>with Anchor 3G.</span></h2><p>Our lift solutions focus specifically on Anchor 3G lifts, with options for commercial, residential, hospital, institutional and industrial settings.</p><Button to="/lifts">Explore Anchor 3G lifts</Button></div></div></section>
+  <ScrollStory/><section className="partner-section gsap-reveal"><div className="container partner-grid"><div className="partner-image"><img src={anchorLogo} alt="Anchor 3G lift logo"/></div><div><Eyebrow>OUR LIFT BRAND</Eyebrow><h2>A better way to move<br/><span>with Anchor 3G.</span></h2><p>Our lift solutions focus specifically on Anchor 3G lifts, with options for commercial, residential, hospital, institutional and industrial settings.</p><Button to="/lifts">Explore Anchor 3G lifts</Button></div></div></section>
   <section className="why-section section-pad gsap-reveal"><div className="container"><SectionTitle kicker="THE BHLISS APPROACH" title="A practical partner for important work."/><div className="why-grid"><article><ShieldCheck/><h3>Dependable approach</h3><p>Clear expectations, responsive communication and a focus on reliable execution.</p></article><article><Layers3/><h3>Connected capabilities</h3><p>Three complementary sectors that support a wide range of building and project needs.</p></article><article><Sparkles/><h3>Customer-first service</h3><p>We listen to your requirement and help you navigate the right service category.</p></article></div></div></section>
   <SectorGallery/>
   <ContactStrip/>
