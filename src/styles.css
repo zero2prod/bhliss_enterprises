@@ -33,5 +33,5 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 /* Quiet handwritten developer signature */
-.footer-bottom .developer-credit{margin-left:auto;color:#858d99;font:400 22px/1 'Allura',cursive;letter-spacing:.1px;text-transform:none;white-space:nowrap}
-@media(max-width:700px){.footer-bottom .developer-credit{margin-left:0;align-self:center;font-size:21px}}
+.footer-bottom .developer-credit{margin:0 auto;color:rgba(133,141,153,.5);font:300 21px/1 'Allura',cursive;letter-spacing:.1px;text-transform:none;white-space:nowrap;opacity:.5}
+@media(max-width:700px){.footer-bottom .developer-credit{margin:0 auto;align-self:center;font-size:20px}}
