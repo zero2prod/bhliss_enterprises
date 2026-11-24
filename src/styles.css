@@ -191,3 +191,18 @@
  .story-scroll-note{bottom:20px;font-size:8px}
 }
 @media(prefers-reduced-motion:reduce){.story-panel{position:relative;display:none}.story-panel:first-of-type{display:flex;opacity:1!important;visibility:visible!important}.story-stage{height:auto;min-height:520px}}
+
+
+/* Native CSS view timelines enhance image reveals on browsers that support them. */
+@supports (animation-timeline: view()) {
+  .category-image-grid figure,
+  .aggregate-photo-grid figure {
+    animation: image-enter linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 42%;
+  }
+  @keyframes image-enter {
+    from { opacity: .45; clip-path: inset(10% 0 0 0); }
+    to { opacity: 1; clip-path: inset(0 0 0 0); }
+  }
+}
