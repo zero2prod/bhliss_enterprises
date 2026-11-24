@@ -1,9 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, lazy, Suspense} from 'react';
 import {Routes, Route, Link, NavLink, useLocation, useParams} from 'react-router-dom';
 import {motion} from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, MeshDistortMaterial, ContactShadows } from '@react-three/drei';
-import { useRef } from 'react';
 import { useGsapReveals } from './hooks/useGsapReveals';
 import {ArrowRight, ArrowUpRight, Menu, X, Phone, Mail, MapPin, Building2, Zap, Mountain, ShieldCheck, CheckCircle2, Clock3, Layers3, Send, ChevronRight, MoveUp, Cable, Camera, HardHat, Home as HomeIcon, Factory, HeartPulse, Landmark, Wrench, Sparkles} from 'lucide-react';
 import brandLogo from './assets/bhliss-logo.png';
@@ -18,6 +15,8 @@ import aggregatesImage from './assets/aggregates-category.jpg';
 import aggregateShovelImage from './assets/aggregate-shovel.jpg';
 import aggregateStonesImage from './assets/aggregate-stones.jpg';
 import {company} from './config';
+
+const HeroVisual = lazy(() => import('./components/HeroVisual.jsx'));
 
 const sectors = [
  {path:'/lifts',id:'01',title:'Lifts',tag:'ANCHOR 3G',desc:'Smart lift solutions for buildings of every scale — from private residences to busy commercial and industrial environments.',img:liftsImage,icon:Building2},
@@ -141,17 +140,6 @@ function EnquiryForm({selected='General Enquiry'}){
 }
 function ContactStrip(){return <section className="contact-strip gsap-reveal"><div className="container strip-grid"><div><Eyebrow light>LET'S TALK ABOUT YOUR PROJECT</Eyebrow><h2>Ready to move<br/><span>things forward?</span></h2><p>Share your requirement with BHLISS Enterprises. We’ll help you identify the right next step.</p><div className="quick-contact"><a href={`tel:${company.phone}`}><Phone/> {company.phone}</a><a href={`mailto:${company.email}`}><Mail/> {company.email}</a></div></div><div className="form-card"><EnquiryForm/></div></div></section>}
 function Footer(){return <footer className="footer"><div className="container footer-grid"><div><img src={brandLogo} alt="BHLISS Enterprises" className="footer-logo"/><p>Dependable solutions across lifts, electrical works and construction materials.</p></div><div><b>Explore</b><Link to="/lifts">Lifts</Link><Link to="/electrical">Electrical</Link><Link to="/aggregates">Aggregates</Link><Link to="/about">About BHLISS</Link></div><div><b>Contact</b><span><Phone/> {company.phone}</span><span><Mail/> {company.email}</span><span><MapPin className="map-pin-icon"/> {company.address}</span><a className="footer-map" href={company.mapsUrl} target="_blank" rel="noreferrer">View location <ArrowUpRight/></a></div></div><div className="container copyright"><span>© {new Date().getFullYear()} BHLISS Enterprises. All rights reserved.</span><span>Built on trust. Driven by possibility.</span></div></footer>}
-function HeroScene(){
- const group=useRef(null);
- useFrame((state,delta)=>{if(!group.current)return;group.current.rotation.y+=(state.pointer.x*.22-group.current.rotation.y)*Math.min(1,delta*2);group.current.rotation.x+=(state.pointer.y*.12-group.current.rotation.x)*Math.min(1,delta*2)});
- return <group ref={group}>
-  <Float speed={1.25} rotationIntensity={.16} floatIntensity={.28}>
-   <mesh castShadow receiveShadow><torusKnotGeometry args={[1.05,.28,180,24,2,3]}/><MeshDistortMaterial color="#f97316" roughness={.24} metalness={.72} distort={.22} speed={1.5}/></mesh>
-   <mesh position={[0,0,-.35]} scale={1.42}><icosahedronGeometry args={[1,2]}/><meshStandardMaterial color="#6b747a" metalness={.85} roughness={.32} wireframe/></mesh>
-  </Float>
- </group>
-}
-function HeroVisual(){return <div className="hero-visual" aria-label="Interactive 3D BHLISS brand sculpture"><Canvas camera={{position:[0,0,4.7],fov:42}} dpr={[1,1.5]} gl={{alpha:true,antialias:true}} fallback={<div className="hero-3d-fallback" aria-hidden="true"/>}><ambientLight intensity={1.2}/><directionalLight position={[4,5,5]} intensity={2.2}/><pointLight position={[-3,-2,2]} color="#f97316" intensity={3}/><HeroScene/><ContactShadows position={[0,-1.8,0]} opacity={.28} scale={5} blur={2.6}/></Canvas><span className="visual-orbit orbit-one"/><span className="visual-orbit orbit-two"/><div className="visual-caption"><i/> ENGINEERED TO MOVE</div></div>}
 function ScrollStory(){
  const stories=[
   {number:'01',kicker:'ANCHOR 3G LIFT SOLUTIONS',title:'Move people and possibilities.',copy:'Lift solutions for residential, commercial, healthcare, institutional and industrial environments.',image:liftsImage,tag:'VERTICAL MOVEMENT'},
@@ -178,7 +166,7 @@ function ScrollStory(){
 }
 function Home(){
  return <main>
-  <section className="hero"><div className="hero-photo" style={{backgroundImage:`linear-gradient(90deg,#171a1df2 0%,#171a1ddc 48%,#171a1d55 100%),url(${photo('photo-1486406146926-c627a92ad1ab',2200)})`}}/><div className="container hero-content"><motion.div initial="hidden" animate="show" variants={fadeUp} className="hero-copy"><Eyebrow light>ENGINEERING • INFRASTRUCTURE • MATERIALS</Eyebrow><h1>Building what<br/>moves us <em>forward.</em></h1><p>From smart Anchor 3G lifts to electrical solutions and construction aggregates, BHLISS Enterprises supports the essential elements of modern projects.</p><div className="hero-actions"><Button to="/contact">Discuss your project</Button><Link className="hero-text-link" to="/about">Get to know us <ArrowRight/></Link></div><div className="hero-stats"><div><b>03</b><span>Business sectors</span></div><div><b>360°</b><span>Project perspective</span></div><div><b>01</b><span>Committed partner</span></div></div></motion.div><div className="hero-side"><HeroVisual/><div className="hero-badge"><span>BE</span><small>BUILT FOR<br/>WHAT'S NEXT</small></div></div></div><div className="hero-scroll">SCROLL TO DISCOVER <i/></div></section>
+  <section className="hero"><div className="hero-photo" style={{backgroundImage:`linear-gradient(90deg,#171a1df2 0%,#171a1ddc 48%,#171a1d55 100%),url(${photo('photo-1486406146926-c627a92ad1ab',2200)})`}}/><div className="container hero-content"><motion.div initial="hidden" animate="show" variants={fadeUp} className="hero-copy"><Eyebrow light>ENGINEERING • INFRASTRUCTURE • MATERIALS</Eyebrow><h1>Building what<br/>moves us <em>forward.</em></h1><p>From smart Anchor 3G lifts to electrical solutions and construction aggregates, BHLISS Enterprises supports the essential elements of modern projects.</p><div className="hero-actions"><Button to="/contact">Discuss your project</Button><Link className="hero-text-link" to="/about">Get to know us <ArrowRight/></Link></div><div className="hero-stats"><div><b>03</b><span>Business sectors</span></div><div><b>360°</b><span>Project perspective</span></div><div><b>01</b><span>Committed partner</span></div></div></motion.div><div className="hero-side"><Suspense fallback={<div className="hero-3d-fallback" aria-hidden="true"/>}><HeroVisual/></Suspense><div className="hero-badge"><span>BE</span><small>BUILT FOR<br/>WHAT'S NEXT</small></div></div></div><div className="hero-scroll">SCROLL TO DISCOVER <i/></div></section>
   <section className="intro-section section-pad gsap-reveal"><div className="container intro-grid"><div><Eyebrow>WHO WE ARE</Eyebrow><h2>One trusted name.<br/><span>Three essential</span><br/>sectors.</h2></div><div className="intro-text"><p className="large">BHLISS Enterprises brings together specialist lift solutions, electrical works and construction materials under one dependable name.</p><p>We believe good projects begin with clear communication, practical solutions and a partner who understands what matters. Our focus is to make sourcing and service coordination more straightforward for our customers.</p><Button to="/about">Discover BHLISS</Button></div></div></section>
   <section className="sectors-section section-pad gsap-reveal" id="sectors"><div className="container"><SectionTitle kicker="OUR BUSINESS VERTICALS" title="Essential services. Thoughtfully connected." copy="Choose a sector to explore our capabilities, service categories and product range."/><div className="service-grid">{sectors.map(s=><ServiceCard item={s} key={s.path}/>)}</div></div></section>
   <ScrollStory/><section className="partner-section gsap-reveal"><div className="container partner-grid"><div className="partner-image"><img src={anchorLogo} alt="Anchor 3G lift logo"/></div><div><Eyebrow>OUR LIFT BRAND</Eyebrow><h2>A better way to move<br/><span>with Anchor 3G.</span></h2><p>Our lift solutions focus specifically on Anchor 3G lifts, with options for commercial, residential, hospital, institutional and industrial settings.</p><Button to="/lifts">Explore Anchor 3G lifts</Button></div></div></section>
