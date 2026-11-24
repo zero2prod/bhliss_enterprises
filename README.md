@@ -10,7 +10,7 @@ Responsive React + Vite website for BHLISS Enterprises. Existing routes, busines
 - Preview: `npm run preview`
 
 ## Interactive motion stack
-- **GSAP + ScrollTrigger** — scroll reveal choreography and section entrances.
+- **GSAP + ScrollTrigger** — scroll reveal choreography, pinned three-chapter scrollytelling and image depth transitions.
 - **Lenis** — smooth desktop wheel scrolling, with reduced-motion support.
 - **Three.js + React Three Fiber + Drei** — cursor-responsive 3D hero sculpture.
 - **Framer Motion** — existing lightweight React UI transitions.
