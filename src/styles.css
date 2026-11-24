@@ -160,7 +160,7 @@
 }
 
 /* Pinned scrollytelling chapter sequence */
-.story-section{position:relative;background:#171a1d;color:#fff;overflow:clip}
+.story-section{position:relative;background:#171a1d;color:#fff;overflow:visible}
 .story-stage{position:relative;height:100vh;min-height:620px;max-height:980px;overflow:hidden;background:#171a1d}
 .story-topline{position:absolute;z-index:5;top:42px;left:max(24px,calc((100vw - 1160px)/2));right:max(24px,calc((100vw - 1160px)/2));display:flex;align-items:center;justify-content:space-between;gap:20px}
 .story-topline>span{display:flex;align-items:center;gap:12px;color:#aeb5b8;font-size:9px;font-weight:800;letter-spacing:1.8px;white-space:nowrap}
