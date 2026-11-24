@@ -14,6 +14,7 @@ Responsive React + Vite website for BHLISS Enterprises. Existing routes, busines
 - **Lenis** — smooth desktop wheel scrolling, with reduced-motion support.
 - **Three.js + React Three Fiber + Drei** — cursor-responsive 3D hero sculpture.
 - **Framer Motion** — existing lightweight React UI transitions.
+- **CSS Scroll-driven Animations** — progressive image reveals on browsers that support view timelines.
 - **CSS** — responsive depth layers, hover light sweep and reduced-motion fallbacks.
 
 The 3D hero is decorative and does not contain essential information. It is designed to degrade gracefully on small screens. Avoid enabling several animation libraries on the same element.
