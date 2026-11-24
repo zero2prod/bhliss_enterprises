@@ -20,7 +20,7 @@ const galleryImages=[];
 const detailGalleryImages={
  lifts: import.meta.glob('../images/lifts/*.{jpg,jpeg,png,webp}',{eager:true,query:'?url',import:'default'}),
  electrical: import.meta.glob('../images/electrical/*.{jpg,jpeg,png,webp}',{eager:true,query:'?url',import:'default'}),
- aggregates: import.meta.glob('../images/aggregates/*/*.{jpg,jpeg,png,webp}',{eager:true,query:'?url',import:'default'})
+ aggregates: import.meta.glob('../images/aggregates/*.{jpg,jpeg,png,webp}',{eager:true,query:'?url',import:'default'})
 };
 const categoryGalleryImages={
  lifts: import.meta.glob('../images/lifts/*/*.{jpg,jpeg,png,webp}',{eager:true,query:'?url',import:'default'}),
